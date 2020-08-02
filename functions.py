@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+# I define a simple function in order to understand how pyhton files works
 def print_ciao():
     print("ciao!")
 
 
-#to_lower function: it transforms all input string to lower case
+# to_lower function: it transforms all input string to lower case
+# As input, a string is needed 
 def to_lower(string):
     try:
         lower_case = ""
@@ -18,22 +20,26 @@ def to_lower(string):
     except:
         print("Not valid input! must be a string!")
 
-#read_dataset_and_create_df function: it read an excel dataset and 
-    #returns a dataframe containing the dataset's informations
+# preprocessing_titles function: it preprocess the titles before the word2vec training
+# As input the list of titles, the lenght of the list are needed
+def preprocessing_titles(titles, number_of_rows):
+    titles_lowercase = []
+    for i in range(0,number_of_rows):
+        titles_lowercase.append(to_lower(titles[i]))
+    titles = titles_lowercase
+    return(titles)
 
-#the input needed is the dataset's name (e.g. name_dataset = "name_dataset.xlsx")
+
+# read_dataset_and_create_df function: it read an excel dataset and returns a dataframe containing the dataset's informations
+# As input the dataset's name (e.g. name_dataset = "name_dataset.xlsx") is needed
 def read_dataset_and_create_df(name_dataset):
     import pandas as pd
-
-    #we read and store the dataset's information in dataset
+    # It reads and stores the dataset's information in dataset
     dataset = pd.read_excel(name_dataset, )
     dataset = pd.read_excel(name_dataset)
-
-    #than we create the dataframe containing the dataset's infos
+    # It creates the dataframe containing the dataset's infos
     dataframe = dataset.copy()
-
-    #print "okay!" to check all has gone well
+    # It prints "okay!" to check all has gone well
     print("okay!")
     
-    #the functions return the dataframe
     return(dataframe)
