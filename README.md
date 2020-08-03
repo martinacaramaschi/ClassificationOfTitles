@@ -1,5 +1,5 @@
 # ClassificationOfTitles
-This repository contains the project i have created during the Pattern Recognition course at University of Bologna.
+This repository contains the project i have created during the Pattern Recognition course of Master in Physics at University of Bologna.
 
 # The documents
 1. [function.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/functions.py) contains all the definition of functions.
