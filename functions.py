@@ -45,6 +45,7 @@ def to_clean_str(string):
     string = re.sub(r"'d", " ", string)
     string = re.sub(r"'ll", " ", string)
     string = re.sub(r"\n", " ", string)
+    string = re.sub(r"\'m", " am", string)
     string = re.sub(r"/", " ", string)
     string = re.sub(r"s'", "s", string)
     string = re.sub(r"-", "", string)
@@ -81,18 +82,30 @@ def to_join_list(list):
     sentence = sep.join(list)
     return(sentence)
 
+''' not used
 # to_remove_stopw_and_punct function: it removes stopw and punctuations
 # as output, a list of sentences is given
 # As input, a list of sentence is needed 
-def to_remove_stopw_and_punct(titles):
+def to_remove_stopw_and_punct(titles): #Funziona
     filtered_titles = [[] for i in range(len(titles))]
     for i in range(len(titles)):
         filtered_titles[i] = to_tokenize_str(titles[i])
         filtered_titles[i] = to_remove_sw_and_punct_from_list(filtered_titles[i])
         filtered_titles[i] = to_join_list(filtered_titles[i])
     return(filtered_titles)
+'''
 
+# to_remove_stopw_and_punct function: it removes stopw and punctuations
+# as output, a list of sentences is given
+# As input, a list of sentence is needed 
+def to_remove_sw_and_punct_from_sent(sentence):
+    new_sentence = [ ]
+    new_sentence = to_tokenize_str(sentence)
+    new_sentence = to_remove_sw_and_punct_from_list(new_sentence)
+    sentence = to_join_list(new_sentence)
+    return(sentence)
 
+''' not used
 def to_lemmatize(titles):
     lemmatized_tokens = [[] for i in range(len(titles))]
     lemmatized_titles = [[] for i in range(len(titles))]
@@ -104,11 +117,20 @@ def to_lemmatize(titles):
             lemmatized_tokens[i].append(tokenized)
         lemmatized_titles[i] = to_join_list(lemmatized_tokens[i])
     return(lemmatized_titles)
+'''
     
 def to_lemmatize_word(w):
     from nltk.stem import WordNetLemmatizer
     lemmatizer = WordNetLemmatizer()
-    lemma = lemmatizer.lemmatize(w)
+    lemma = lemmatizer.lemmatize((w))
     new_w = lemmatizer.lemmatize((lemma), "v")
     return(new_w)
-            
+    
+def to_lemmatize_sent(sentence):
+    new_sentence = []
+    new_sentence = to_tokenize_str(sentence)
+    lemmatized_sentence = []
+    for w in new_sentence:
+        lemmatized_sentence.append(to_lemmatize_word(w))
+    new_sentence = to_join_list(lemmatized_sentence)
+    return(new_sentence)
