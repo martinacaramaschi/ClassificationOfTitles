@@ -52,6 +52,7 @@ def to_clean_str(string):
     string = re.sub(r"\?", " ", string)
     string = re.sub(r"\:", "", string)
     string = re.sub(r"\.", "", string)
+    string = re.sub(r"\'", " ", string)
     return(string.strip().lower())
 
 # to_tokenize_str function: it tokenize a sentence; 
@@ -134,3 +135,16 @@ def to_lemmatize_sent(sentence):
         lemmatized_sentence.append(to_lemmatize_word(w))
     new_sentence = to_join_list(lemmatized_sentence)
     return(new_sentence)
+    
+print(list(set(["cat", "me", "love", "me"])))
+print(list(["today is today", "today future"]))
+
+#the list of all words with repetitions 
+def list_words(titles):
+    all_words_in_titles = [] 
+    for line in titles:
+        x  = []
+        x = to_tokenize_str(line)
+        for element in x:
+            all_words_in_titles.append(element)
+    return(all_words_in_titles)
