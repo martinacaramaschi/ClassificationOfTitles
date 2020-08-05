@@ -16,7 +16,7 @@ to_lemmatize_sent                    # 10.
 from functions import print_ciao, to_lower, to_read_dataset_and_create_df, \
                       to_clean_str, to_tokenize_str, to_remove_sw_and_punct_from_list, \
                       to_join_list, to_remove_sw_and_punct_from_sent, to_lemmatize_word, \
-                      to_lemmatize_sent
+                      to_lemmatize_sent, list_words
 from preprocessing import preprocessing_titles
 
 # Testing print_ciao() function
@@ -94,3 +94,10 @@ preprocessed_titles = []
 print(preprocessing_titles(sent_test))
 print(preprocessing_titles(titles))
 
+# Testing list_words(sentences) function
+print(list_words(sent_test))
+
+#test project
+input_titles = []
+input_titles = preprocessing_titles(titles)
+print(list_words(input_titles))
