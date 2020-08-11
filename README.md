@@ -1,4 +1,4 @@
-# ClassificationOfTitles
+# Classification of titles of scientific articles
 This repository contains the project i have created during the Pattern Recognition course of Master in Physics at University of Bologna.
 
 ## The goal of the project
@@ -25,7 +25,7 @@ Any program code (as our classifier) can manage with numbers, not words. For thi
 When all words have been transormed into vectors of real numbers, we represent each title as the avarege of its words. Now our titles are no more texts but vectors of numbers, and we can use them to train our classifier.
 
 ### 3. Training of the classifier
-
+![fig. Word2Vec model](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/readme_images/02fig.Word2Vec_CBOW.JPG)
 
 ## Structure of the project
 1. [function.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/functions.py) contains all the definition of functions.
