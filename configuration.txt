@@ -1,0 +1,5 @@
+[settings]
+excel_database = "database_TitlesAndClusters.xlsx"
+
+Title = 0
+Class = 1
