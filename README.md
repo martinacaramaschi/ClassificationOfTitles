@@ -29,7 +29,7 @@ In figure it is schematised how this model works. CBOW is a neural network that 
 When all words have been transormed into vectors of real numbers, we represent each title as the avarege of his words. Now our titles are no more texts but vectors of numbers, and we can use them to train our classifier.
 
 ### 3. Training of the classifier
-
+Our classifier is a neural network called Multilayer Perceptron (MLP). It consists of an input, a hidden layer and an output. It utilises the supervised technique called backpropagation for training. Using asi input the titles, represented as vector od real numbers, and their corresponding class, already known, we will train the classifier.
 
 ## Structure of the project
 ### Support files
