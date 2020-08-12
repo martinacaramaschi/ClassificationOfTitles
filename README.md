@@ -32,6 +32,12 @@ When all words have been transormed into vectors of real numbers, we represent e
 
 
 ## Structure of the project
-1. [function.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/functions.py) contains all the definition of functions.
-2. [call_functions.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/call_functions.py) tests and calls the functions.
-3. [preprocessing.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/preprocessing.py) is the function the execute the preprocessing on titles, before using them to train Word2Vec models.
+### Support files
+- [function.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/functions.py) contains all functions i have created but not already tested.
+- [call_functions.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/call_functions.py) is used to call functions and see how they work.
+- [testing.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/testing.py) contains the rountine of testing i have built to test my functions.
+### Project's files
+0. [importing_dataset.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/importing_dataset.py) executes step 0 of the project.
+1. [preprocessing.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/preprocessing.py) executes step 1 of the project.
+### For user
+- [configuration.txt](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/configuration.txt) is the only one files the user have to edit to use the project by himself.
