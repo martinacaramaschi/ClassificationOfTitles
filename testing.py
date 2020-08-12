@@ -25,7 +25,7 @@ def to_lower(string):
 """ Here i have created four simple positive tests"""
 
 # An uppercased word is espected to became lowercased
-def test_to_lower1():
+def test_to_lower_1():
     assert to_lower("HELLO") == "hello"
 
 # An empty word is espected to remain empty
@@ -123,3 +123,35 @@ def test_to_lower_6(name):
 #      chr(216)
 #      >> 'Ø'
 # ----------------------------------------------------------------------------#
+
+def to_clean_str(string):
+    import re
+    string = re.sub(r"\'s", " ", string)
+    string = re.sub(r"\'d", " ", string)
+    string = re.sub(r"\'ll", " ", string)
+    string = re.sub(r"n't", " not", string)
+    string = re.sub(r"'ve", " have", string)
+    string = re.sub(r"'re", " are", string)
+    string = re.sub(r"'m", " am", string)
+    string = re.sub(r"s'", "s", string)
+    string = re.sub(r"'", " '", string)
+    string = re.sub(r"-", "", string)
+    string = re.sub(r"\:", "", string)
+    string = re.sub(r"\.", "", string)
+    return(string.strip().lower())
+
+@given(st.text(min_size=1, max_size=3))
+def test_to_clean_str_1(string):
+    if string == "\'s" or string == "\'d" or string == "\'ll":
+        assert to_clean_str(string) == " "
+    if string == "'ve":
+        assert to_clean_str(string) == " have"
+    if string == "n't":
+        assert to_clean_str(string) == " not"
+    if string == "'re":
+        assert to_clean_str(string) == " are"
+    if string == "\'m":
+        assert to_clean_str(string) == " am"
+    if string == "'":
+        assert to_clean_str(string) == " '"
+
