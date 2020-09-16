@@ -1,13 +1,58 @@
 # -*- coding: utf-8 -*-
-   
-# to_tokenize_str function: it tokenize a sentence; 
-# as output, a list of tokens is given
-# As input, a string is needed 
-def to_tokenize_str(string):
+
+#the list of all words with repetitions 
+def list_words(titles):
     from nltk.tokenize import word_tokenize
-    word_tokens = []
-    word_tokens = word_tokenize(string)
-    return(word_tokens)
+    all_words_in_titles = [] 
+    for line in titles:
+        x  = []
+        x = word_tokenize(line)
+        for element in x:
+            all_words_in_titles.append(element)
+    return(all_words_in_titles)
+
+#da qui in poi metto le funzioni testate che funzionano ---------------------#
+
+# to_lower function: it transforms all input string to lower case
+# As input, a string is needed 
+def to_lower(string):
+    """ This function tranform an input text string into the same, 
+    but written in lowercase """
+    try:
+        lower_case = ""
+        for character in string:
+            # to change uppurcased letter to lowercased
+            if 'A' <= character <= 'Z':
+                location = ord(character) - ord('A')
+                new_ascii = location + ord('a')
+                character = chr(new_ascii)
+            # to change accented uppercased letter to lowercased
+            elif chr(192) <= character <= chr(214) or \
+                chr(216) <= character <= chr(221):
+                new_ascii = ord(character) + 32
+                character = chr(new_ascii)
+            lower_case = lower_case + character   
+    except:
+        print("Error! Not valid input! Must be a string!")
+    return(lower_case)
+
+# to_clean_str function: it removes or substitutes some string 
+# (e.g. 'll is removed and n't become not)
+# As input a string is needed
+def to_clean_str(string):
+    import re
+    string = re.sub(r"\'s", " ", string)
+    string = re.sub(r"\'d", " ", string)
+    string = re.sub(r"\'ll", " ", string)
+    string = re.sub(r"n't", " not", string)
+    string = re.sub(r"'ve", " have", string)
+    string = re.sub(r"'re", " are", string)
+    string = re.sub(r"'m", " am", string)
+    string = re.sub(r"s'", "s", string)
+    string = re.sub(r"-", "", string)
+    string = re.sub(r"\:", "", string)
+    string = re.sub(r"\.", "", string)
+    return(string.strip().lower())
 
 # to_remove_sw_and_punct_from_list function: it removes stopwords and punctuation from a list; 
 # as output, the list of remained tokens is given
@@ -21,6 +66,7 @@ def to_remove_sw_and_punct_from_list(list):
         if w not in sw and w not in punct:
             new_list.append(w)
     return(new_list)
+
 # to_join_list function: it join a list of elements; as output, the sentence is given
 # As input, a list is needed 
 def to_join_list(list):
@@ -28,68 +74,30 @@ def to_join_list(list):
     sentence = sep.join(list)
     return(sentence)
 
-''' not used
-# to_remove_stopw_and_punct function: it removes stopw and punctuations
-# as output, a list of sentences is given
-# As input, a list of sentence is needed 
-def to_remove_stopw_and_punct(titles): #Funziona
-    filtered_titles = [[] for i in range(len(titles))]
-    for i in range(len(titles)):
-        filtered_titles[i] = to_tokenize_str(titles[i])
-        filtered_titles[i] = to_remove_sw_and_punct_from_list(filtered_titles[i])
-        filtered_titles[i] = to_join_list(filtered_titles[i])
-    return(filtered_titles)
-'''
-
-# to_remove_stopw_and_punct function: it removes stopw and punctuations
-# as output, a list of sentences is given
-# As input, a list of sentence is needed 
-def to_remove_sw_and_punct_from_sent(sentence):
-    new_sentence = [ ]
-    new_sentence = to_tokenize_str(sentence)
-    new_sentence = to_remove_sw_and_punct_from_list(new_sentence)
-    sentence = to_join_list(new_sentence)
-    return(sentence)
-
-''' not used
-def to_lemmatize(titles):
-    lemmatized_tokens = [[] for i in range(len(titles))]
-    lemmatized_titles = [[] for i in range(len(titles))]
-    for i in range(len(titles)):
-        list = []
-        list = to_tokenize_str(titles[i])
-        for token in list:
-            tokenized = to_lemmatize_word(token)
-            lemmatized_tokens[i].append(tokenized)
-        lemmatized_titles[i] = to_join_list(lemmatized_tokens[i])
-    return(lemmatized_titles)
-'''
-    
 def to_lemmatize_word(w):
     from nltk.stem import WordNetLemmatizer
     lemmatizer = WordNetLemmatizer()
     lemma = lemmatizer.lemmatize((w))
     new_w = lemmatizer.lemmatize((lemma), "v")
     return(new_w)
-    
+
+# to_remove_stopw_and_punct function: it removes stopw and punctuations
+# as output, a list of sentences is given
+# As input, a list of sentence is needed 
+def to_remove_sw_and_punct_from_sent(sentence):
+    from nltk.tokenize import word_tokenize
+    new_sentence = [ ]
+    new_sentence = word_tokenize(sentence) #non usa to_tokenize_str
+    new_sentence = to_remove_sw_and_punct_from_list(new_sentence)
+    sentence = to_join_list(new_sentence)
+    return(sentence)
+
 def to_lemmatize_sent(sentence):
+    from nltk.tokenize import word_tokenize
     new_sentence = []
-    new_sentence = to_tokenize_str(sentence)
+    new_sentence = word_tokenize(sentence)
     lemmatized_sentence = []
     for w in new_sentence:
         lemmatized_sentence.append(to_lemmatize_word(w))
     new_sentence = to_join_list(lemmatized_sentence)
     return(new_sentence)
-    
-print(list(set(["cat", "me", "love", "me"])))
-print(list(["today is today", "today future"]))
-
-#the list of all words with repetitions 
-def list_words(titles):
-    all_words_in_titles = [] 
-    for line in titles:
-        x  = []
-        x = to_tokenize_str(line)
-        for element in x:
-            all_words_in_titles.append(element)
-    return(all_words_in_titles)
