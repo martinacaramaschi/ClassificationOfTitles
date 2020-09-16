@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-
+from functions import to_lower, \
+                      to_clean_str, \
+                      to_remove_sw_and_punct_from_list,\
+                      to_join_list, \
+                      to_lemmatize_word, \
+                      to_remove_sw_and_punct_from_sent,\
+                      to_lemmatize_sent
+'''
 def to_lower(string):
     """ This function tranform an input text string into the same, 
     but written in lowercase """
@@ -20,7 +27,7 @@ def to_lower(string):
     except:
         print("Error! Not valid input! Must be a string!")
     return(lower_case)
-
+'''
 #------------------ first block of testing functions -------------------------#    
 """ Here i have created four simple positive tests"""
 
@@ -123,22 +130,23 @@ def test_to_lower_6(name):
 #      chr(216)
 #      >> 'Ø'
 # ----------------------------------------------------------------------------#
-
+'''
 def to_clean_str(string):
-    import re
-    string = re.sub(r"\'s", " ", string)
-    string = re.sub(r"\'d", " ", string)
-    string = re.sub(r"\'ll", " ", string)
-    string = re.sub(r"n't", " not", string)
-    string = re.sub(r"'ve", " have", string)
-    string = re.sub(r"'re", " are", string)
-    string = re.sub(r"'m", " am", string)
-    string = re.sub(r"s'", "s", string)
-    string = re.sub(r"'", " '", string)
-    string = re.sub(r"-", "", string)
-    string = re.sub(r"\:", "", string)
-    string = re.sub(r"\.", "", string)
-    return(string.strip().lower())
+        import re
+        string = re.sub(r"\'s", " ", string)
+        string = re.sub(r"\'d", " ", string)
+        string = re.sub(r"\'ll", " ", string)
+        string = re.sub(r"n't", " not", string)
+        string = re.sub(r"'ve", " have", string)
+        string = re.sub(r"'re", " are", string)
+        string = re.sub(r"'m", " am", string)
+        string = re.sub(r"s'", "s", string)
+        string = re.sub("'", " ", string)
+        string = re.sub(r"-", "", string)
+        string = re.sub(r"\:", "", string)
+        string = re.sub(r"\.", "", string)
+        return(string.strip().lower())
+'''
 
 @given(st.text(min_size=1, max_size=3))
 def test_to_clean_str_1(string):
@@ -152,6 +160,124 @@ def test_to_clean_str_1(string):
         assert to_clean_str(string) == " are"
     if string == "\'m":
         assert to_clean_str(string) == " am"
-    if string == "'":
-        assert to_clean_str(string) == " '"
 
+# ----------------------------------------------------------------------------#
+""" non testo word_tokenize() perchè l'ho importata"""
+
+# ----------------------------------------------------------------------------#
+'''
+def to_remove_sw_and_punct_from_list(list):
+    from nltk.corpus import stopwords
+    new_list = []
+    sw = set(stopwords.words('english')) 
+    punct = {'.', ':', ',', '!', '?', '--', '``', '-','(', ')', "'", '\n', "''", '&'}
+    for w in list:
+        if w not in sw and w not in punct:
+            new_list.append(w)
+    return(new_list)
+'''
+def test_remove_sw_punct_1():
+    lista_test_1 = ['amore', '!', 'love']
+    new_lista_test_1 = ['amore', 'love']
+    assert to_remove_sw_and_punct_from_list(lista_test_1) == new_lista_test_1
+
+# test sulle stop words    
+def test_remove_sw_punct_2():
+    from nltk.corpus import stopwords
+    stopwords = stopwords.words('english')
+    assert to_remove_sw_and_punct_from_list(stopwords) == []
+
+# test sulle puntuations
+def test_remove_sw_punct_3():
+    punctuations = ['.', ':', ',', '!', '?', '--', '``', '-', '(', ')', "'",\
+                    '\n', "''", '&']
+    assert to_remove_sw_and_punct_from_list(punctuations) == []
+
+# ----------------------------------------------------------------------------#
+'''
+def to_join_list(list):
+    sep = ' '
+    sentence = sep.join(list)
+    return(sentence)
+'''
+def test_to_join_list_1():
+       lista = ['m', 'i', ' ', 'l', 'a', 'u', 'r', 'e', 'e', 'r', 'ò']
+       assert to_join_list(lista) == 'm i   l a u r e e r ò'
+       
+# mi aspetto che unendo due parole lunghe 2 caratteri, la frase finale sia lunga 5
+# perchè lo spazio aggiunto è lunga uno 
+@given(a = st.text(st.characters(min_codepoint=32, max_codepoint=221, 
+                              blacklist_categories=('Cc', 'Cs')),
+                min_size=2, 
+                max_size=2
+                ),
+       b = st.text(st.characters(min_codepoint=32, max_codepoint=221, 
+                              blacklist_categories=('Cc', 'Cs')),
+                min_size=2, 
+                max_size=2))
+def test_to_join_list_2(a,b):
+       lista = [a,b]
+       assert len(to_join_list(lista)) == 5
+
+# ----------------------------------------------------------------------------#
+'''       
+def to_lemmatize_word(w):
+    from nltk.stem import WordNetLemmatizer
+    lemmatizer = WordNetLemmatizer()
+    lemma = lemmatizer.lemmatize((w))
+    new_w = lemmatizer.lemmatize((lemma), "v")
+    return(new_w)
+'''
+
+'''i will test if some plural nouns became singular; if verbs became all in
+ infinitive form; if the adjectives and casual words remain the same'''
+def test_to_lemmatize_word_1():
+    plural = 'plurals'
+    singular = 'plural'
+    assert to_lemmatize_word(plural) == singular
+    
+def test_to_lemmatize_word_2():
+     gerund = 'dying'
+     participle = 'died'
+     infinitive = 'die'
+     assert to_lemmatize_word(gerund) == infinitive
+     assert to_lemmatize_word(participle) == infinitive
+
+def test_to_lemmatize_word_3():
+    casual_w = 'kfsijheiwgjwl'
+    adjective = 'lovely'
+    assert to_lemmatize_word(casual_w) == casual_w
+    assert to_lemmatize_word(adjective) == adjective
+
+#-----------------------------------------------------------------------------#
+"""
+def to_remove_sw_and_punct_from_sent(sentence):
+    from nltk.tokenize import word_tokenize
+    new_sentence = [ ]
+    new_sentence = word_tokenize(sentence) #non usa to_tokenize_str
+    new_sentence = to_remove_sw_and_punct_from_list(new_sentence)
+    sentence = to_join_list(new_sentence)
+    return(sentence)
+"""
+def test_to_remove_sw_from_sent():
+    with_sw_and_punct = 'this phrase is good: but soon best!'
+    without_sw_and_punct = 'phrase good soon best'
+    assert to_remove_sw_and_punct_from_sent(with_sw_and_punct) == without_sw_and_punct
+    
+#----------------------------------------------------------------------------#
+"""
+def to_lemmatize_sent(sentence):
+    from nltk.tokenize import word_tokenize
+    new_sentence = []
+    new_sentence = word_tokenize(sentence)
+    lemmatized_sentence = []
+    for w in new_sentence:
+        lemmatized_sentence.append(to_lemmatize_word(w))
+    new_sentence = to_join_list(lemmatized_sentence)
+    return(new_sentence)
+"""
+def test_to_lemmatize_sent():
+    with_plurals_and_verb = 'students playing sports'
+    without_plurals_and_verb = 'student play sport'
+    assert to_lemmatize_sent(with_plurals_and_verb) == without_plurals_and_verb
+    
