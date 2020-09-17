@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 
-#the list of all words with repetitions 
-def list_words(titles):
-    from nltk.tokenize import word_tokenize
-    all_words_in_titles = [] 
-    for line in titles:
-        x  = []
-        x = word_tokenize(line)
-        for element in x:
-            all_words_in_titles.append(element)
-    return(all_words_in_titles)
+def from_word_to_vec(input_titles):
+    from gensim.models import Word2Vec
+    model_vectors = Word2Vec(input_titles, size=50, workers=10, min_count=1, iter=300, window=3)
+    vocabulary = model_vectors.wv.vocab
+    return(model_vectors, vocabulary)
 
-#da qui in poi metto le funzioni testate che funzionano ---------------------#
+#-----da qui in poi metto le funzioni testate che funzionano------------------#
 
 # to_lower function: it transforms all input string to lower case
 # As input, a string is needed 
@@ -50,6 +45,8 @@ def to_clean_str(string):
     string = re.sub(r"'m", " am", string)
     string = re.sub(r"s'", "s", string)
     string = re.sub(r"-", "", string)
+    string = re.sub(r"´", "", string) 
+    string = re.sub(r"'", " ' ", string) #here i changed
     string = re.sub(r"\:", "", string)
     string = re.sub(r"\.", "", string)
     return(string.strip().lower())
@@ -101,3 +98,22 @@ def to_lemmatize_sent(sentence):
         lemmatized_sentence.append(to_lemmatize_word(w))
     new_sentence = to_join_list(lemmatized_sentence)
     return(new_sentence)
+
+def to_list_all_words_no_repetition(list_all_words):
+    all_words_in_titles_no_repetition = list(set(list_all_words))
+    return(all_words_in_titles_no_repetition)
+
+#the list of all words with repetitions 
+def to_list_all_words_with_repetition(titles):
+    from nltk.tokenize import word_tokenize
+    all_words_in_titles = [] 
+    count = 0
+    for line in titles:
+        x  = []
+        x = word_tokenize(line)
+        count += len(x)
+        for element in x:
+            all_words_in_titles.append(element)
+    # check point
+    if count == len(all_words_in_titles):
+         return(all_words_in_titles)
