@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from functions import to_lower, \
-                      to_clean_str, \
-                      to_remove_sw_and_punct_from_list,\
-                      to_join_list, \
-                      to_lemmatize_word, \
-                      to_remove_sw_and_punct_from_sent,\
-                      to_lemmatize_sent
+                          to_clean_str, \
+                          to_remove_sw_and_punct_from_list,\
+                          to_join_list, \
+                          to_lemmatize_word, \
+                          to_remove_sw_and_punct_from_sent,\
+                          to_lemmatize_sent, \
+                          to_list_all_words_with_repetition, \
+                          to_list_all_words_no_repetition
 '''
 def to_lower(string):
     """ This function tranform an input text string into the same, 
@@ -148,7 +150,7 @@ def to_clean_str(string):
         return(string.strip().lower())
 '''
 
-@given(st.text(min_size=1, max_size=3))
+@given(st.text(min_size=2, max_size=3))
 def test_to_clean_str_1(string):
     if string == "\'s" or string == "\'d" or string == "\'ll":
         assert to_clean_str(string) == " "
@@ -161,6 +163,11 @@ def test_to_clean_str_1(string):
     if string == "\'m":
         assert to_clean_str(string) == " am"
 
+def test_to_clean_str_2():
+    assert to_clean_str('teacher´') == 'teacher'
+    assert to_clean_str('inquiry-based') == 'inquirybased'
+    assert to_clean_str("t't") == "t ' t"
+    
 # ----------------------------------------------------------------------------#
 """ non testo word_tokenize() perchè l'ho importata"""
 
@@ -280,4 +287,38 @@ def test_to_lemmatize_sent():
     with_plurals_and_verb = 'students playing sports'
     without_plurals_and_verb = 'student play sport'
     assert to_lemmatize_sent(with_plurals_and_verb) == without_plurals_and_verb
+    
+#----------------------------------------------------------------------------#
+"""
+def to_list_all_words_no_repetition(list_all_words):
+    all_words_in_titles_no_repetition = list(set(list_all_words))
+    return( all_words_in_titles_no_repetition)
+"""
+def test_to_list_all_words_no_repetition():
+    list_1 = ['me', 'em', 'me', 'me']
+    assert len(to_list_all_words_no_repetition(list_1)) == 2
+    list_2 = []
+    assert to_list_all_words_no_repetition(list_2) == list_2
+    list_3 = ['tutte', 'parole', 'diverse']
+    assert len(to_list_all_words_no_repetition(list_3)) == len(list_3)
+    
+#----------------------------------------------------------------------------#
+"""
+def to_list_all_words_with_repetition(titles):
+    from nltk.tokenize import word_tokenize
+    all_words_in_titles = [] 
+    count = 0
+    for line in titles:
+        x  = []
+        x = word_tokenize(line)
+        count += len(x)
+        for element in x:
+            all_words_in_titles.append(element)
+    # check point
+    if count == len(all_words_in_titles):
+         return(all_words_in_titles)
+"""
+def test_to_list_all_words_with_repetition():
+    titoli_test = ['tu come stai', 'io bene', '']
+    assert len(to_list_all_words_with_repetition(titoli_test)) == 5
     
