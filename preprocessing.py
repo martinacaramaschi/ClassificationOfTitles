@@ -8,6 +8,7 @@ from functions import to_lower, to_clean_str, to_remove_sw_and_punct_from_sent, 
        # it lemmatized all nouns and verbs.
 # As output, the list of senteces after all preprocessing steps.
 def preprocessing_titles(titles):
+    from nltk.tokenize import word_tokenize
     # Step to lowercase all titles
     titles_lowercase = []
     for line in titles:
@@ -24,4 +25,9 @@ def preprocessing_titles(titles):
     titles_lemmatized = []
     for line in titles_without_sw_and_punct:
         titles_lemmatized.append(to_lemmatize_sent(line))    
-    return(titles_lemmatized)
+    #creo i vettori di lemmi
+    input_titles = []
+    for line in titles_lemmatized:
+        block = word_tokenize(line)
+        input_titles.append(block)
+    return(input_titles)
