@@ -3,3 +3,4 @@ excel_database = database_TitlesAndClusters.xlsx
 column_of_titles = 0
 column_of_classes = 1
 save_in = risultati.txt
+to_classify = teaching scientific methods into schools
