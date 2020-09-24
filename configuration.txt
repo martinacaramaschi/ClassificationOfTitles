@@ -1,5 +1,5 @@
 [settings]
-excel_database = "database_TitlesAndClusters.xlsx"
-
-Title = 0
-Class = 1
+excel_database = database_TitlesAndClusters.xlsx
+column_of_titles = 0
+column_of_classes = 1
+save_in = risultati.txt
