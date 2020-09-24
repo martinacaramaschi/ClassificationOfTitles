@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-""" VOGLIO ARRIVARE QUI
-titles_vectors = to_average_words(preprocessed_titles)
-
-"""
 import numpy as np 
 import pandas as pd
 
@@ -61,7 +57,18 @@ def classifier(train_x, train_y, test_x, test_y):
     score_train = reg.score(train_x, train_y)
     score_test = reg.score(test_x, test_y)
     return(score_train, score_test)
+"""
+from sklearn.neural_network import MLPClassifier
+model_MLP = MLPClassifier(hidden_layer_sizes=(200, 100))
+reg = model_MLP.fit(train_x, train_y)
 
+print(reg.score(train_x, train_y))
+print(reg.score(test_x, test_y))
+print(print(reg.predict_proba(test_x[:10])))
+
+print(reg.predict(test_x[:8]))
+"""
+   
 # preprocessing_titles function:
 # As input, a list of sentences (in my case, titles) is needed.
 # It lowercased all sentences; remove stop words and punctuation symbols from sentences;
