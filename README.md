@@ -3,7 +3,7 @@ This repository illustrates the project i have created during the Pattern Recogn
 
 ## Goal of the project and why of this repository
 The goal of this project is to write a program code able to classify scientific article's titles. The idea of this project was born when the organizer of a scientific conference asked me if there was a way to automatically classify the titles of papers, which were sent to him by those who proposed their paper for the conference.
-I decided to create this repository to illustrate to evrybody how it is possible to create an authomatic classifier. This approach can be applied potentially to all types of text's classifications, so i hope many of you who are reading can find it useful.
+I decided to create this repository to illustrate to everybody how it is possible to create an authomatic classifier. This approach can be applied potentially to all types of text's classifications, so i hope many of you who are reading can find it useful.
 
 ## What a classifier is and what we need to know from the beginning
 In this project I have created a statements' classifier, where statements are article's titles. The classifier works in this way: having an unknown title as input, the program code returns the corresponding class, as output.
