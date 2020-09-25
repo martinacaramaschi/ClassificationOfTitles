@@ -59,7 +59,7 @@ train_x, train_y, test_x, test_y = f.divide_train_test(average_sentence, vector_
 
 # EIGHT transforming the unclassified title for the process of classification
 new_input = f.preprocessing_titles(new_title)
-new_vector = f.prepare_new_title(model, new_input)
+new_vector = f.prepare_new_title(model, vocabulary, new_input)
 
 # NINTH training and testing the classifier
 # as output we obtain the score of training and testing 
