@@ -33,7 +33,7 @@ When all words have been transormed into vectors of real numbers, we represent e
 
 ### 3. Training of the classifier
 Our classifier is a neural network called Multilayer Perceptron (MLP). It consists of an input, a hidden layer and an output. It utilises the supervised technique called backpropagation for training. Using as input the titles, represented as vector of real numbers, and their corresponding class, already known, we will train the classifier.
-To chech if the classifier performs good classifications we also test it. For this reason a part of right classification's examples are used to train the classifier and the rest to test it.
+To check if the classifier performs good classifications, I also test it. For this reason, a part of right classification's examples are used to train the classifier, and the rest to test it.
 
 ### 4. Classification
 The classifier is ready to classify a new title.
@@ -43,9 +43,9 @@ These are the steps in order to start the program and to save the results:
 
 1. The user has to provide the inital necessary informations, filling the [configuration.txt](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/configuration.txt) file: to write the name of the excel file, that contains the examples of right classifications, next to "excel_database = " (in my case, excel_database = database_TitlesAndClusters.xlsx). The dataset must contain only two columns, one with the titles and the others with the corresponding classes, and must be saved in the same folder of the project; to write the number of titles' column of the dataset next "column_of_titles = " (in my case, column_of_titles = 0); to write the number of classes' column of the dataset next "column_of_classes = " (in my case, column_of_classes = 1). Be careful: the program works only if the two column are the first and the second of the excel file and if the firts column is indicated with the number 0, and the second with the number 1; to write the name of the text file, in which the final results will be saved, next to "save_in = " (in my case, save_in = risultati1.txt); to write a sentence not already classified, that will be classified, next to "to_classify = " (in my case, to_classify = teaching scientific methods into schools).
 
-2. The user can runs the entire project, from the step zero tot the end, using the command: "!python simulation.py configuration.txt".
+2. The user can runs the entire project, from the step zero to the end, using the command: "!python simulation.py configuration.txt".
 
-3. At the end, the user can read the results of the classification in the file we indicated for the saving.
+3. At the end, the user can read the results of the classification in the file he have choosen for the saving.
 
 The results' file should appear like the following picture: there are the list of the possible classes availble, the training and testing scores, and the class of the new title is indicated.
 
