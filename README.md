@@ -47,6 +47,10 @@ These are the steps in order to start the program and to save the results:
 
 3. At the end, the user can read the results of the classification in the file we indicated for the saving.
 
+The results' file should appear like the following picture: there are the list of the possible classes availble, the training and testing scores, and the class of the new title is indicated.
+
+![results.JPG](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/readme_images/results.JPG)
+
 This is how I divided my project into blocks:
 
 * In the file [function.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/functions.py) I have developed all the functions I needed in the project (from those I used to import the dataset, to those to perform the preprocessing's phase, to those to transform the words into vectors of real numbers, to those used to train and test the classifier).
