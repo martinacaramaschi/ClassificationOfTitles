@@ -59,8 +59,8 @@ This is how I divided my project into blocks:
 
 * In the file [configuration.txt](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/configuration.txt) there are indicated all the initial settings, used in the simulation file.
 
-* In the file [simulation.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/simulation.py) there is the code the used need to import the dataset, containing all classification's examples; to preprocess the titles; to tranform all titles into element readble by the classifier that are vectos of real numbers; to train and test the classifier; to perform the classification of the unknown title; to save all results into a text file. 
+* In the file [simulation.py](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/simulation.py) there is the code the user need to import the dataset, containing all classification's examples; to preprocess the titles; to transform all titles into readable elements by the classifier, that are vectors of real numbers; to train and test the classifier; to perform the classification of the unknown title; to save all results into a text file. 
 
-* In file [database_TitlesAndClusters.xlsx](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/database_TitlesAndClusters.xlsx) ther is the dataset i have used to perfom my own simulation.
+* In file [database_TitlesAndClusters.xlsx](https://github.com/martinacaramaschi/ClassificationOfTitles/blob/master/database_TitlesAndClusters.xlsx) there is the dataset i have used to perfom my own simulation.
 
 
